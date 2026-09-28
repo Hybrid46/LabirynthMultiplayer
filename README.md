@@ -208,10 +208,10 @@ One machine is the SERVER. Everyone else is a CLIENT.
     +----------+----------+----------+----------+
     |                     |                     |
     v                     v                     v
- +--------+            +--------+            +--------+
- | CLIENT |            | CLIENT |            | CLIENT |
- |    A   |            |    B   |            |    C   |
- +--------+            +--------+            +--------+
+    +--------+            +--------+            +--------+
+    | CLIENT |            | CLIENT |            | CLIENT |
+    |    A   |            |    B   |            |    C   |
+    +--------+            +--------+            +--------+
 
 The server is the single source of truth. Clients never talk to each
 other directly — everything goes through the server.
