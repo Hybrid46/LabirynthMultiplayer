@@ -208,10 +208,10 @@ One machine is the SERVER. Everyone else is a CLIENT.
     +----------+----------+----------+----------+
     |                     |                     |
     v                     v                     v
-+--------+            +--------+            +--------+
-| CLIENT |            | CLIENT |            | CLIENT |
-|    A   |            |    B   |            |    C   |
-+--------+            +--------+            +--------+
+ +--------+            +--------+            +--------+
+ | CLIENT |            | CLIENT |            | CLIENT |
+ |    A   |            |    B   |            |    C   |
+ +--------+            +--------+            +--------+
 
 The server is the single source of truth. Clients never talk to each
 other directly — everything goes through the server.
@@ -275,12 +275,12 @@ SERVER → CLIENT  (only if something went wrong):
 
     CLIENT                                  SERVER
       |                                       |
-      |  TCP connect to 192.168.1.10:5555 -->  |  accept()
+      |  TCP connect to 192.168.1.10:5555 --> |  accept()
       |                                       |  spawn a new thread
       |                                       |  pick_spawn() for a free cell
       |                                       |  assign next symbol (A, B, C...)
       |                                       |  add to players{} dict
-      |  <-- {"type":"init", maze, exit, ...}  |  send()
+      |  <-- {"type":"init", maze, exit, ...} |  send()
       |                                       |
       |  (client renders the maze)            |  broadcast state to everyone
       |                                       |  (so existing players see the new one)
