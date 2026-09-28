@@ -1,6 +1,6 @@
-# Labyrinth Multiplayer 🏰
+Here's the README as plain text — just copy everything below and save it as `README.md`:
 
-![Labyrinth Multiplayer screenshot](LabirynthMultiplayer.png)
+# Labyrinth Multiplayer 🏰
 
 A tiny, dependency-free **LAN multiplayer maze game** written in pure Python.
 One machine runs the server, everyone else connects with the client — race
@@ -35,141 +35,152 @@ through a randomly generated labyrinth and be the first to reach the exit.
 
 ### 1. Start the server (one machine only)
 
-```bash
-python server.py
-```
+    python server.py
 
 You'll see something like:
 
-====================================================
-  LABYRINTH SERVER
-  Address : 192.168.1.10:5555
-  Maze    : 31 x 15   exit at (29, 13)
-  Connect : python client.py 192.168.1.10
-  Ctrl+C to stop.
-====================================================
+    ====================================================
+      LABYRINTH SERVER
+      Address : 192.168.1.10:5555
+      Maze    : 31 x 15   exit at (29, 13)
+      Connect : python client.py 192.168.1.10
+      Ctrl+C to stop.
+    ====================================================
 
-💡 On the first run, Windows/macOS may ask to allow incoming connections.
-Say yes, or other machines can't reach port 5555.
+> 💡 On the first run, Windows/macOS may ask to allow incoming connections.
+> Say **yes**, or other machines can't reach port `5555`.
 
-2. Connect from each player's machine
+### 2. Connect from each player's machine
 
-```bash
-python client.py 192.168.1.10
-```
+    python client.py 192.168.1.10
 
-Use the IP that your server printed — not the one in this example.
+Use the IP that **your server printed** — not the one in this example.
 
 That's it. The maze appears and you're playing.
 
-🎮 Controls
-Key	Action
-W	Move up
-A	Move left
-S	Move down
-D	Move right
-Q	Quit
+---
 
-You're shown as a bold colored letter. Other players show up in their own colors.
+## 🎮 Controls
 
-🧪 Try It Solo First
+| Key | Action |
+|-----|--------|
+| `W` | Move up |
+| `A` | Move left |
+| `S` | Move down |
+| `D` | Move right |
+| `Q` | Quit |
+
+You're shown as a **bold** colored letter. Other players show up in their own colors.
+
+---
+
+## 🧪 Try It Solo First
 
 You can test the whole thing on a single machine before inviting friends:
 
-```bash
-# Terminal 1
-python server.py
+    # Terminal 1
+    python server.py
 
-# Terminal 2
-python client.py 127.0.0.1
+    # Terminal 2
+    python client.py 127.0.0.1
 
-# Terminal 3 (optional) — a second fake player
-python client.py 127.0.0.1
-```
+    # Terminal 3 (optional) — a second fake player
+    python client.py 127.0.0.1
 
-🖼️ How It Looks
+---
 
-```bash
-╔══════════════════════════════════════════╗
-║  You are 'B'   Players online: 3         ║
-║                                          ║
-║  #############################           ║
-║  #A....#.......#.............#           ║
-║  #.###.#.#####.#.###########.#           ║
-║  #.#...#.....#.#.#.........#.#           ║
-║  #.#.#######.#.#.#.#######.#.#           ║
-║  #...#.......#...#.#.....#...#           ║
-║  #.#.#.#########.#.#.###.#.#.#           ║
-║  #.#.#...........#.#.#...#.#.#           ║
-║  #.#.###############.#.###.#.#           ║
-║  #B..#...........#...#...#...#           ║
-║  #.#####.#######.#.###.#.###.#           ║
-║  #.....#.....#...#...#.#...#.#           ║
-║  #.###.#.###.#.###.#.#.#.#.#.#           ║
-║  #...#...#...#...#...#...#..E#           ║
-║  #############################           ║
-║                                          ║
-║  Move: W A S D     Quit: Q               ║
-╚══════════════════════════════════════════╝
+## 🖼️ How It Looks
 
-   # = wall        . = floor        E = exit
-   A, B, C… = players (your own letter is bold)
-   ```
+    ╔══════════════════════════════════════════╗
+    ║  You are 'B'   Players online: 3         ║
+    ║                                          ║
+    ║  #############################           ║
+    ║  #A....#.......#.............#           ║
+    ║  #.###.#.#####.#.###########.#           ║
+    ║  #.#...#.....#.#.#.........#.#           ║
+    ║  #.#.#######.#.#.#.#######.#.#           ║
+    ║  #...#.......#...#.#.....#...#           ║
+    ║  #.#.#.#########.#.#.###.#.#.#           ║
+    ║  #.#.#...........#.#.#...#.#.#           ║
+    ║  #.#.###############.#.###.#.#           ║
+    ║  #B..#...........#...#...#...#           ║
+    ║  #.#####.#######.#.###.#.###.#           ║
+    ║  #.....#.....#...#...#.#...#.#           ║
+    ║  #.###.#.###.#.###.#.#.#.#.#.#           ║
+    ║  #...#...#...#...#...#...#..E#           ║
+    ║  #############################           ║
+    ║                                          ║
+    ║  Move: W A S D     Quit: Q               ║
+    ╚══════════════════════════════════════════╝
 
-   📁 Files
-File	Purpose
-server.py	Generates the maze, listens on port 5555, tracks players, enforces the win condition
-client.py	Connects to the server, renders the maze, sends your keypresses
+       # = wall        . = floor        E = exit
+       A, B, C… = players (your own letter is bold)
 
-⚙️ Configuration
+---
 
-A few constants at the top of server.py are worth tweaking:
-Constant	Default	Notes
-PORT	5555	Change if it clashes with something else on your LAN
-W, H	31, 15	Maze size. Keep both odd or the generator may misbehave
-SYMBOLS	A–Z 0–9	Player symbols, assigned in join order
+## 📁 Files
 
-If you change PORT, update the matching value in client.py too.
-🛠️ How It Works (Short Version)
+| File | Purpose |
+|------|---------|
+| `server.py` | Generates the maze, listens on port `5555`, tracks players, enforces the win condition |
+| `client.py` | Connects to the server, renders the maze, sends your keypresses |
 
-    The server generates a maze using a recursive backtracker.
+---
 
-    Each connecting client gets a thread, a spawn cell, and a symbol (A, B, …).
+## ⚙️ Configuration
 
-    Every keypress is sent as a single character over TCP.
+A few constants at the top of `server.py` are worth tweaking:
 
-    The server validates the move (in bounds? not a wall? game not over?), updates
-    the player's position, and broadcasts the full game state to everyone.
+| Constant | Default | Notes |
+|----------|---------|-------|
+| `PORT`   | `5555`  | Change if it clashes with something else on your LAN |
+| `W`, `H` | `31`, `15` | Maze size. **Keep both odd** or the generator may misbehave |
+| `SYMBOLS`| `A–Z 0–9` | Player symbols, assigned in join order |
 
-    Reaching cell (W-2, H-2) sets the winner, and further moves are ignored.
+If you change `PORT`, update the matching value in `client.py` too.
+
+---
+
+## 🛠️ How It Works (Short Version)
+
+1. The server generates a maze using a **recursive backtracker**.
+2. Each connecting client gets a **thread**, a spawn cell, and a symbol (`A`, `B`, …).
+3. Every keypress is sent as a single character over TCP.
+4. The server validates the move (in bounds? not a wall? game not over?), updates
+   the player's position, and **broadcasts the full game state** to everyone.
+5. Reaching cell `(W-2, H-2)` sets the winner, and further moves are ignored.
 
 Simple, synchronous, and fast enough for a LAN game with a handful of players.
-❓ Troubleshooting
 
-Could not connect to <ip>:5555
+---
 
-    Double-check you're using the IP the server printed.
+## ❓ Troubleshooting
 
-    Make sure both machines are on the same Wi-Fi/Ethernet network.
+**`Could not connect to <ip>:5555`**
+- Double-check you're using the IP the server printed.
+- Make sure both machines are on the same Wi-Fi/Ethernet network.
+- Allow Python through your firewall (both on the server machine).
 
-    Allow Python through your firewall (both on the server machine).
+**Colors look wrong / garbled**
+- Use Windows Terminal, PowerShell 7+, or any modern terminal.
 
-Colors look wrong / garbled
+**`python` not found**
+- Try `python3` instead (common on macOS/Linux).
 
-    Use Windows Terminal, PowerShell 7+, or any modern terminal.
+**Client hangs on "Waiting for maze..."**
+- The server isn't reachable. Same firewall/IP checks as above.
 
-python not found
+---
 
-    Try python3 instead (common on macOS/Linux).
-
-Client hangs on "Waiting for maze..."
-
-    The server isn't reachable. Same firewall/IP checks as above.
-
-📜 License
+## 📜 License
 
 MIT — do whatever you want with it.
-🙌 Contributing
+
+---
+
+## 🙌 Contributing
 
 This is a tiny hobby project. If you want to add features (spectator mode,
 timed rounds, chat, a scoring system), feel free to open a PR or fork it.
+
+---
